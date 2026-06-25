@@ -1,6 +1,21 @@
 import { v2 as cloudinary } from 'cloudinary';
-import fs from fs ;
+import fs from 'fs' ;
 //import { configDotenv } from "dotenv";
+
+
+const uploadOnCloudinary = async(localFilePath) =>{
+      try{
+        if (!localFilePath) {return null}
+        const response = await cloudinary.uploader.upload(localFilePath , {resouce_type : "auto"})
+        // console.log("file is upload on cloudinary", response.url)
+        fs.unlinkSync(localFilePath) 
+        return response
+      }
+      catch(error){
+        fs.unlinkSync(localFilePath) // remove the locally saved temprorary file 
+        return null;
+      }
+    }
 
 (async function() {
 
@@ -10,26 +25,6 @@ import fs from fs ;
         api_key: process.env.CLOUDINARY_API_KEY, 
         api_secret: process.env.CLOUDINARY_API_SECRET // Click 'View API Keys' above to copy your API secret
     });
-
-
-    const uploadOnCloudinary = async(localFilePath) =>{
-      try{
-        if (!localFilePath) {return null}
-        const response = await cloudinary.upload(localFilePath , {resouce_type : "auto"})
-        console.log("file is upload on cloudinary", response.url)
-        return response
-      }
-      catch(error){
-        fs.unlinkSync(localFilePath) // remove the locally saved temprorary file 
-        return null;
-      }
-    }
-
-    
-    
-
-
-
 
     // Upload an image
      const uploadResult = await cloudinary.uploader
@@ -62,3 +57,5 @@ import fs from fs ;
     
     console.log(autoCropUrl);    
 })();
+
+export { cloudinary, uploadOnCloudinary };
