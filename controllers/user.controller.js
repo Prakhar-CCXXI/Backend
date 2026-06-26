@@ -4,6 +4,35 @@ import { ApiResponse } from "../utils/ApiResponses.js";
 import { User } from "../models/user.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
+
+
+
+const loginUser = asyncHandler(async (req, res)=>{
+
+  // req body -> data
+  // username or email base access
+  // find the user
+  // password check
+  // access and refresh token
+  // send cookie
+
+
+  const {email, username, password} = req.body
+
+  if(!username || !email){
+    throw new ApiError(400,"username or password is required")
+  }
+
+  const user = await  User.findOne({
+    $or: [{username},{email}]
+  }) 
+
+  if (!user) {
+    throw new ApiErrors(404,'user does not exist')
+  }
+
+})
+
 const registerUser = asyncHandler(async (req, res) => {
   // get user details from frontend
   // validation - not empty
@@ -95,4 +124,4 @@ const registerUser = asyncHandler(async (req, res) => {
   );
 });
 
-export { registerUser };
+export { registerUser, loginUser };
