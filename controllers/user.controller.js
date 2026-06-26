@@ -31,7 +31,14 @@ const loginUser = asyncHandler(async (req, res)=>{
     throw new ApiErrors(404,'user does not exist')
   }
 
+  const isPasswordvalid = await user.isPasswordCorrect(password) 
+
+  if(!isPasswordvalid){
+    throw new ApiErrors(404,"Password incorrect")
+  }
 })
+
+
 
 const registerUser = asyncHandler(async (req, res) => {
   // get user details from frontend
