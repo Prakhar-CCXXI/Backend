@@ -1,4 +1,24 @@
 {
+<<<<<<< HEAD
+  "name": "deployment",
+  "version": "1.0.0",
+  "description": "a basic app to deploy",
+  "keywords": [
+    "node",
+    "express",
+    "deploy"
+  ],
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+=======
   "name": "industry_backend",
   "version": "1.0.0",
   "description": "professional backend ",
@@ -25,5 +45,6 @@
     "multer": "^2.1.1",
     "nodemon": "^3.1.14",
     "prettier": "^3.8.3"
+>>>>>>> e31c4ed (Postman and debugging)
   }
 }
